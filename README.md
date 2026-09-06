@@ -1,5 +1,16 @@
 # XQZ Codex Monitor (Electron)
 
+<p align="center">
+  <img src="assets/readme-hero.png" alt="XQZ Codex Monitor：在 XQZ-IV01 小屏上显示 Codex 额度、Mac 状态和网络信息" width="100%">
+</p>
+
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-111827?logo=apple&logoColor=white">
+  <img alt="Electron 37" src="https://img.shields.io/badge/Electron-37-47848F?logo=electron&logoColor=white">
+  <img alt="XQZ-IV01 1280x720" src="https://img.shields.io/badge/XQZ--IV01-1280%C3%97720-2F74EB">
+  <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-1BB17D">
+</p>
+
 macOS 菜单栏小程序：通过 USB-C / DP 驱动 Sony XQZ-IV01 外接小屏，把仪表盘以 1280×720 白色卡片常驻显示在外接小屏上，主显示器不受影响。仪表盘支持三个页面切换：
 
 - **Codex 额度**：5 小时额度、每周额度、近 14 天趋势、代码审查剩余、额度重置券、额外 Credits（数据来自 CodexBar 官方 CLI，不碰账号凭据）。
