@@ -80,9 +80,9 @@ function fmtUptime(seconds) {
 function macVersion(release) {
   const m = String(release || '').match(/^(\d+)\.(\d+)/);
   if (!m) return release || '--';
-  const major = Number(m[1]);
+  const d = Number(m[1]);
   const minor = Number(m[2]);
-  return `macOS ${major - 4}.${minor}`;
+  return `macOS ${d <= 24 ? d - 9 : d + 1}.${minor}`;
 }
 
 function svgEl(name, attrs) {

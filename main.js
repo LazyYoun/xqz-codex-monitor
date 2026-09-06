@@ -408,6 +408,8 @@ function createWindows() {
   mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   mainWindow.setAlwaysOnTop(true, 'screen-saver');
   mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+  // 仪表盘永不成为活动窗口：避免 Cmd+Tab 切换器被吸附到副屏、也不打断主屏键盘焦点。
+  mainWindow.setFocusable(false);
   mainWindow.webContents.on('before-input-event', (_event, input) => {
     if (input.type === 'keyDown' && input.key === 'Escape') mainWindow.hide();
   });

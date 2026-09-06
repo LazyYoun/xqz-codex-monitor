@@ -8,6 +8,8 @@ macOS 菜单栏小程序：通过 USB-C / DP 驱动 Sony XQZ-IV01 外接小屏�
 
 系统数据由 macOS 自带报告器采集（`os.cpus` / `vm_stat` / `fs.statfsSync` / `netstat -ib` / `route` / `scutil` / `networksetup`），无第三方依赖；温度传感器在 Apple Silicon 上需要 root 权限的 `powermetrics`，未集成。
 
+> 亮度说明：XQZ 的物理亮度按键只改本机背光、不经过 USB（Sony 官方 UsbConnectionManager 协议仅 `show`/`stop`）；macOS 26 上 DDC/CI（ddcctl）因缺少 `com.apple.windowserver.plist` 无法工作。屏幕绝对亮度过高时请用设备实体亮度键调节。
+
 - 独立的原生 USB helper（libusb）持续向 XQZ 发送 `show` 心跳；识别名为 `Moni Extende`/`XQZ` 或 16:9 非主屏的显示器并自动投屏。
 
 ## 连接与展示
