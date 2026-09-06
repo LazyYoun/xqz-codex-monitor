@@ -1,7 +1,7 @@
 # XQZ Codex Monitor (Electron)
 
 <p align="center">
-  <img src="assets/readme-hero.png" alt="XQZ Codex Monitor：在 XQZ-IV01 小屏上显示 Codex 额度、Mac 状态和网络信息" width="100%">
+  <img src="assets/readme-hero-v2.png" alt="XQZ Codex Monitor：在 XQZ-IV01 小屏上显示 Codex 额度、Mac 状态和网络信息" width="100%">
 </p>
 
 <p align="center">
