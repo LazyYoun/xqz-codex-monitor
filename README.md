@@ -11,6 +11,12 @@
   <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-1BB17D">
 </p>
 
+<p align="center">
+  <a href="https://www.sony.jp/xperia/product/accessories/xqz-iv01/">Sony XQZ-IV01 官方产品介绍</a>
+  ·
+  <a href="https://helpguide.sony.net/mobile/xqz-iv01/v1/h_zz/index.html">官方帮助指南</a>
+</p>
+
 macOS 菜单栏小程序：通过 USB-C / DP 驱动 Sony XQZ-IV01 外接小屏，把仪表盘以 1280×720 白色卡片常驻显示在外接小屏上，主显示器不受影响。仪表盘支持三个页面切换：
 
 - **Codex 额度**：5 小时额度、每周额度、近 14 天趋势、代码审查剩余、额度重置券、额外 Credits（数据来自 CodexBar 官方 CLI，不碰账号凭据）。
