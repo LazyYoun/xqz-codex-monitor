@@ -1,0 +1,14 @@
+{
+  "name": "xqz-codex-monitor",
+  "version": "1.0.0",
+  "description": "XQZ Codex 用量剩余小屏仪表盘（macOS Electron）",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "./build.sh"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^37.2.0"
+  }
+}

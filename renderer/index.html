@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <title>XQZ Codex Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="viewport">
+    <header id="topbar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#2F74EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8h4c.6-2.1 2-3 4-3s3.4.9 4 3h4"/>
+            <path d="M4 8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z"/>
+            <path d="M14 13v4l3 2M12 17v-4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>XQZ 监控仪表盘</h1>
+          <p id="subtitle">数据来自 CodexBar</p>
+        </div>
+      </div>
+      <div id="pill" class="pill off">
+        <span id="pill-dot"></span>
+        <span id="pill-text">未检测到 XQZ</span>
+      </div>
+    </header>
+
+    <nav id="tabs">
+      <button type="button" class="tab active" data-tab="codex">Codex 额度</button>
+      <button type="button" class="tab" data-tab="sys">Mac 系统</button>
+      <button type="button" class="tab" data-tab="net">网络 &amp; IP</button>
+    </nav>
+
+    <div id="content">
+      <!-- ============================ Codex 额度 ============================ -->
+      <section class="view active" id="view-codex">
+        <div id="quota-row">
+          <article class="card quota">
+            <div class="card-icon bolt">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#2F74EB"><path d="M13 2 4.8 13.2c-.3.4 0 1 .5 1H10l-1.5 7.3c-.2.8.8 1.2 1.2.6L19.2 10.8c.3-.4 0-1-.5-1H14l1.5-7.3c.1-.4 0-.8-.4-1S13.4 1.6 13 2Z"/></svg>
+            </div>
+            <div class="card-head">
+              <h2>5 小时额度</h2>
+              <span class="used" id="u5h">已用 --</span>
+            </div>
+            <div class="remaining" id="r5h">--</div>
+            <div class="bar"><div class="fill" id="f5h"></div></div>
+            <div class="card-foot">
+              <span id="s5h">重置 --</span>
+              <span id="up5h">更新 --</span>
+            </div>
+          </article>
+
+          <article class="card quota">
+            <div class="card-icon cal">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#825BD7" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            </div>
+            <div class="card-head">
+              <h2>每周额度</h2>
+              <span class="used" id="uweek">已用 --</span>
+            </div>
+            <div class="remaining" id="rweek">--</div>
+            <div class="bar"><div class="fill" id="fweek"></div></div>
+            <div class="card-foot">
+              <span id="sweek">重置 --</span>
+              <span id="upweek">更新 --</span>
+            </div>
+          </article>
+        </div>
+
+        <div id="detail-row">
+          <article class="card trend">
+            <div class="card-head">
+              <h2>近 14 天使用趋势</h2>
+              <span class="hint" id="trend-hint">CodexBar Credits</span>
+            </div>
+            <svg id="trend" viewBox="0 0 780 300" preserveAspectRatio="none"></svg>
+            <div class="trend-axis">
+              <span id="axis-left">--</span>
+              <span id="axis-right">--</span>
+              <span id="axis-peak">--</span>
+            </div>
+          </article>
+
+          <div id="small-col">
+            <article class="card small">
+              <div class="card-icon review">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1BB17D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <div class="s-body">
+                <div class="s-title">代码审查</div>
+                <div class="s-value" id="review">暂无数据</div>
+              </div>
+            </article>
+
+            <article class="card small">
+              <div class="card-icon reset">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#825BD7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+              </div>
+              <div class="s-body">
+                <div class="s-title">额度重置券</div>
+                <div class="s-value" id="resetCredits">--</div>
+              </div>
+            </article>
+
+            <article class="card small">
+              <div class="card-icon extra">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="#F29139"><path d="M12 2.5 14.5 9 21 9.4l-5.1 4 1.7 6.3-5.6-3.7-5.6 3.7 1.7-6.3-5.1-4 6.5-.4L12 2.5Z"/></svg>
+              </div>
+              <div class="s-body">
+                <div class="s-title">额外 Credits</div>
+                <div class="s-value" id="extraCredits">--</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ Mac 系统 ============================ -->
+      <section class="view" id="view-sys">
+        <div class="sys-row">
+          <article class="card sys cpu">
+            <div class="card-head card-head-icon">
+              <div class="card-icon cyc">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2F74EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>
+              </div>
+              <h2>CPU 使用率</h2>
+            </div>
+            <div class="big big-num"><span id="cpuPct">--</span><span class="unit">%</span></div>
+            <div class="bar"><div class="fill" id="cpuBar"></div></div>
+            <div class="kv"><span id="cpuCores">--</span><span class="kv-r" id="loadAvg">--</span></div>
+            <div class="kv small"><span id="cpuModel">--</span></div>
+          </article>
+
+          <article class="card sys mem">
+            <div class="card-head card-head-icon">
+              <div class="card-icon mem">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#825BD7" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="11" rx="2"/><path d="M6 8v5M10 8v5M14 8v5M18 8v5"/><path d="M9 20h6"/></svg>
+              </div>
+              <h2>内存使用</h2>
+            </div>
+            <div class="mem-row">
+              <div class="big big-num"><span id="memPct">--</span><span class="unit">%</span></div>
+              <div class="mem-used" id="memUsed">--</div>
+            </div>
+            <div class="bar"><div class="fill" id="memBar"></div></div>
+            <div class="kv small" id="memBreakdown">--</div>
+          </article>
+        </div>
+
+        <div class="sys-row">
+          <article class="card sys disk">
+            <div class="card-head card-head-icon">
+              <div class="card-icon disk">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1BB17D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><circle cx="12" cy="6" r="1.3" fill="#1BB17D"/></svg>
+              </div>
+              <h2>磁盘占用</h2>
+            </div>
+            <div class="big disk-big"><span id="diskUsed">--</span><span class="unit">已用</span></div>
+            <div class="bar"><div class="fill" id="diskBar"></div></div>
+            <div class="kv"><span id="diskFree">--</span><span class="kv-r" id="diskPct">--</span></div>
+            <div class="kv small" id="diskFooter">--</div>
+          </article>
+
+          <article class="card sys net">
+            <div class="card-head card-head-icon">
+              <div class="card-icon wifi">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F29139" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M12 20l3.5-3.5a5 5 0 0 0-7 0Z"/></svg>
+              </div>
+              <h2>实时网速</h2>
+            </div>
+            <div class="net-row">
+              <div class="net-lg"><span class="net-dir down">↓ 下载</span><span class="net-val" id="netDown">--</span></div>
+              <div class="net-lg"><span class="net-dir up">↑ 上传</span><span class="net-val" id="netUp">--</span></div>
+            </div>
+            <svg id="netSpark" viewBox="0 0 620 110" preserveAspectRatio="none"></svg>
+            <div class="kv small"><span id="netIface">--</span><span class="kv-r">近 2 分钟</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================ 网络 & IP ============================ -->
+      <section class="view" id="view-net">
+        <div class="net-top">
+          <article class="card wan">
+            <div class="card-head card-head-icon">
+              <div class="card-icon globe">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2F74EB" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg>
+              </div>
+              <h2>外网 IP</h2>
+              <button type="button" class="mini-btn" id="refreshExt">刷新</button>
+            </div>
+            <div class="wan-ip" id="extIp">--</div>
+            <div class="kv"><span id="extIsp">--</span><span class="kv-r" id="extOrg">--</span></div>
+            <div class="kv"><span id="extGeo">--</span><span class="kv-r" id="extTimezone">--</span></div>
+            <div class="kv small"><span id="extTime">未获取</span><span id="extStatus" class="tag">--</span></div>
+          </article>
+
+          <div class="net-right">
+            <article class="card lan">
+              <div class="card-head card-head-icon">
+                <div class="card-icon lan">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1BB17D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M6.5 10v3h11v1"/></svg>
+                </div>
+                <h2>本机 IPv4</h2>
+                <span class="kv-r small" id="lanIface">--</span>
+              </div>
+              <div class="lan-ip" id="lanIp">--</div>
+              <div class="kv small"><span id="lanHost">--</span><span class="kv-r" id="lanGw">--</span></div>
+            </article>
+            <article class="card chan">
+              <div class="card-head card-head-icon">
+                <div class="card-icon route">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#825BD7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M7.2 5H15a4 4 0 0 1 0 8H9a4 4 0 0 0 0 8h7.2"/></svg>
+                </div>
+                <h2>网络通道</h2>
+              </div>
+              <div class="chan-row"><span class="tag">DNS</span><span id="dnsList">--</span></div>
+              <div class="chan-row"><span class="tag">SSID</span><span id="ssidList">--</span></div>
+            </article>
+          </div>
+        </div>
+        <article class="card foot">
+          <span>外网 IP 由 ipify / ip-api.com 提供 · 数据仅用于本机展示</span>
+          <span id="extFootAt">--</span>
+        </article>
+      </section>
+    </div>
+
+    <div id="banner"></div>
+  </div>
+
+  <div id="mirror-guide" hidden>
+    <div class="mcard">
+      <div class="mtitle">XQZ 正在镜像主屏</div>
+      <p>macOS 把 XQZ 设成了镜像显示器，整个桌面被复制成 720p，所以看起来是“整块屏幕被投屏”。</p>
+      <p class="mstep">请在系统设置 → 显示器 → 排列 里<b>取消勾选「镜像显示器」</b>，让它变成独立扩展屏。</p>
+      <p class="mstep">取消后本 App 会把仪表盘<b>单独投到 XQZ</b>，主屏自动恢复 4K。</p>
+      <div class="mrow">
+        <button type="button" id="mirror-help">打开显示器设置</button>
+        <button type="button" id="mirror-close">知道了</button>
+      </div>
+    </div>
+  </div>
+  <div id="primary-guide" hidden>
+    <div class="mcard">
+      <div class="mtitle">XQZ 现在是主显示屏</div>
+      <p>仪表盘只显示在副屏，为避免遮挡你的主屏幕，已自动隐藏。</p>
+      <p class="mstep">请打开 系统设置 → 显示器 → 排列，把<b>白色菜单栏条拖回大屏幕</b>（或选择大屏为“主显示器”）。</p>
+      <p class="mstep">切换后仪表盘会自动恢复到 XQZ 小屏显示。</p>
+      <div class="mrow">
+        <button type="button" id="primary-help">打开显示器设置</button>
+        <button type="button" id="primary-close">知道了</button>
+      </div>
+    </div>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
